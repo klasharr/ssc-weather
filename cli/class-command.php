@@ -13,20 +13,30 @@ use WP_CLI;
  */
 class command {
 	
-	const API_KEY = '';
+	// const API_KEY = ''; using an option instead currently I don't want to accidentally commit
+	// my API_KEY.
+
 	const LOCATION = '353786'; // Swanage
 	const THREE_HOUR_FORECAST = 'http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/%d?res=3hourly&key=%s';
 	const CACHE_DURATION = 60*5;
+	const TIMEOUT = 2;
 
 	function three_hour_forecast() {
 
-		$data = $this->get_response();
-		WP_CLI::log( print_r( json_decode( $data, true ), 1 ) );
+		$raw_data = json_decode( $this->get_response(), true );
+		WP_CLI::log( print_r( json_decode( $raw_data, true ), 1 ) );
+
+
+
+		[ 'SiteRep' ][ 'DV' ]
 	}
 
 	private function get_response() {
 
-		$url = sprintf( self::THREE_HOUR_FORECAST, self::LOCATION, self::API_KEY );
+		$url = sprintf( self::THREE_HOUR_FORECAST, self::LOCATION, get_option( 'met_office_key' ) );
+
+		WP_CLI::log( $url );
+
 		$hash = md5( $url );
 
 		WP_CLI::log( $url );
@@ -36,7 +46,7 @@ class command {
 			return unserialize( $data );
 		}
 
-		$response = wp_remote_get( $url, array( 'timeout' => 2 ) );
+		$response = wp_remote_get( $url, array( 'timeout' => self::TIMEOUT ) );
 
 		if ( is_array( $response ) ) {
 
@@ -54,7 +64,7 @@ class command {
 			WP_CLI::log( "Data ! exists" );
 
 		} else {
-			WP_CLI::log( "no response data" );
+			WP_CLI::log( "No response data" );
 		}
 
 	}
