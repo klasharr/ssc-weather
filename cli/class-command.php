@@ -28,7 +28,6 @@ class command {
 
 
 
-		[ 'SiteRep' ][ 'DV' ]
 	}
 
 	private function get_response() {
