@@ -2,11 +2,19 @@
 
 This is in development but will be a WordPress plugin to display UK Met Office weather data. I'm getting it all working in a CLI command first plus write unit teststhen the last step will be to make it display on a website.
 
+## REST_API Endpoint
+
+View the data from this URL
+
+`/wp-json/ssc-weather/v1/forecast`
+
 ## CLI command
+
+Inspect the data from the shell from this command. 
 
 `wp ssc-weather three_hour_forecast`
 
-Which so far produces:
+Only really a simple test which so far produces:
 
 ```
 2019-04-14
