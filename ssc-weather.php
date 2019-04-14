@@ -1,7 +1,5 @@
 <?php
 
-namespace SSC_Weather;
-
 /*
  Plugin Name: SSC Weather
  Plugin URI:
@@ -19,6 +17,6 @@ if ( class_exists( 'WP_CLI' ) ) {
 
 	require_once( SSC_WEATHER_PLUGIN_DIR . 'cli/class-command.php' );
 	$command = new Command;
-	\WP_CLI::add_command( 'ssc-weather', $command );
+	WP_CLI::add_command( 'ssc-weather', $command );
 
 }

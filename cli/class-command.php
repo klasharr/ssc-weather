@@ -1,7 +1,6 @@
 <?php
 
-namespace SSC_Weather;
-use WP_CLI;
+require_once( SSC_WEATHER_PLUGIN_DIR . 'classes/class-weather-object.php' );
 
 /**
  * Class command
@@ -23,22 +22,68 @@ class command {
 
 	function three_hour_forecast() {
 
-		$raw_data = json_decode( $this->get_response(), true );
-		WP_CLI::log( print_r( json_decode( $raw_data, true ), 1 ) );
+		try {
+
+			$raw_data = json_decode( $this->get_response(), true );
+
+			$o = new Weather_Object();
+			$o->init( $raw_data );
+
+//			WP_CLI::log( print_r( $o->get_forecast(), 1 ) );
+
+			$tmp = array(
+				'06:00' => 'Early morning',
+				'09:00' => 'Morning',
+				'12:00' => 'Early afternoon',
+				'15:00' => 'Afternoon',
+				'18:00' => 'Evening',
+			);
 
 
+			foreach( $o->get_forecast() as $date => $three_hourly_forecasts ) {
 
+				WP_CLI::log( $date );
+				WP_CLI::log( '' );
+
+				WP_CLI::log(
+
+					str_pad('Time',20," ", STR_PAD_RIGHT ) .
+					str_pad('Wind',12," ", STR_PAD_RIGHT ) .
+					str_pad('Gust',12," ", STR_PAD_RIGHT ) .
+
+					str_pad('Temp',12," ", STR_PAD_RIGHT ) .
+					str_pad('Rain',12," ", STR_PAD_RIGHT )
+
+				);
+
+				foreach( $three_hourly_forecasts as $hours => $segment ) {
+
+					if( in_array( $hours, array( '00:00', '03:00', '21:00' ) ) ) continue;
+
+					WP_CLI::log(
+						str_pad($tmp[ $hours ],20," ", STR_PAD_RIGHT ) .
+						str_pad($segment[ 'Wind Speed' ],12," ", STR_PAD_RIGHT ) .
+						\cli\Colors::colorize( '%G'. str_pad($segment[ 'Wind Gust' ].'%n' ,12," ", STR_PAD_RIGHT ) ) .
+
+						str_pad($segment[ 'Temperature' ],12," ", STR_PAD_RIGHT ) .
+						str_pad($segment[ 'Precipitation Probability' ],12," ", STR_PAD_RIGHT )
+					);
+
+				}
+				WP_CLI::log( '' );
+			}
+
+		} catch ( Exception $e ) {
+
+			WP_CLI::log( $e->getMessage() );
+
+		}
 	}
 
 	private function get_response() {
 
 		$url = sprintf( self::THREE_HOUR_FORECAST, self::LOCATION, get_option( 'met_office_key' ) );
-
-		WP_CLI::log( $url );
-
 		$hash = md5( $url );
-
-		WP_CLI::log( $url );
 
 		if( $data = get_transient( $hash ) ) {
 			WP_CLI::log( 'transient data exists.' );
@@ -63,7 +108,7 @@ class command {
 			WP_CLI::log( "Data ! exists" );
 
 		} else {
-			WP_CLI::log( "No response data" );
+			WP_CLI::log( "No response." );
 		}
 
 	}
