@@ -28,6 +28,17 @@ Afternoon           27mph       38mph     10C         4%
 Evening             20mph       31mph     10C         8%          
 ```
 
+## Settings
+
+This needs Met Office [developer API](https://www.metoffice.gov.uk/datapoint/api) key which for now is stored in a transient added from the shell.
+
+`met_office_key`
+
+The location is hardcoded currently in the command class.
+
+`const LOCATION = '353786'; // Swanage`
+
+Locations are retrieved from the locations data endpoint (see below).
 
 
 ## Met Office API docs
