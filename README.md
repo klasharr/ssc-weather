@@ -1,6 +1,6 @@
 # ssc-weather
 
-This is an in development but will be a WordPress plugin to display UK Met Office weather data. I'm getting it all working in a CLI command first, will get unit tests working then the last step will be to make it display on a website.
+This is in development but will be a WordPress plugin to display UK Met Office weather data. I'm getting it all working in a CLI command first plus write unit teststhen the last step will be to make it display on a website.
 
 ## CLI command
 
@@ -30,7 +30,7 @@ Evening             20mph       31mph     10C         8%
 
 ## Settings
 
-This needs Met Office [developer API](https://www.metoffice.gov.uk/datapoint/api) key which for now is stored in a transient added from the shell.
+Met Office API requests needs a [developer API](https://www.metoffice.gov.uk/datapoint/api) key which for now is stored in a transient added from the shell.
 
 `met_office_key`
 
@@ -38,7 +38,7 @@ The location is hardcoded currently in the command class.
 
 `const LOCATION = '353786'; // Swanage`
 
-Locations are retrieved from the locations data endpoint (see below).
+Locations are retrieved from the locations data endpoint (see below). These settings can be added to an admin page later.
 
 
 ## Met Office API docs
