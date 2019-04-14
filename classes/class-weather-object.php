@@ -17,13 +17,17 @@ class Weather_Object {
 	 */
 	private $location = array();
 
-	public function init( array $raw_data ) {
-		$this->validate( $raw_data );
+	private $cache_time = null;
 
+	public function init( $data ) {
+
+		$raw_data = json_decode( $data[ 'data'], TRUE );
+
+		$this->validate( $raw_data );
 		$this->set_location( $raw_data[ 'SiteRep'][ 'DV'][ 'Location'] );
 		$this->set_units( $raw_data[ 'SiteRep'][ 'Wx']['Param'] );
 		$this->set_forecast( $raw_data[ 'SiteRep'][ 'DV'][ 'Location']['Period' ] );
-
+		
 	}
 
 	public function validate( array $raw_data ) {
@@ -50,6 +54,10 @@ class Weather_Object {
 			'elevation' => $location[ 'elevation'],
 		);
 
+	}
+
+	public function get_location() {
+		return $this->location;
 	}
 
 	public function get_location_value( $key ){
@@ -111,9 +119,10 @@ class Weather_Object {
 		$this->forecast = $out;
 	}
 
-	function get_forecast() {
+	function get_forecast_data() {
 		return $this->forecast;
 	}
+
 }
 
 
