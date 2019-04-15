@@ -1,5 +1,12 @@
 <?php
 
+namespace SSCW;
+
+use Exception;
+use WP_Error;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 require_once( SSC_WEATHER_PLUGIN_DIR . 'classes/class-weather-object.php' );
 
 class Request {

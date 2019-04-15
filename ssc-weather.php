@@ -10,6 +10,11 @@
  Text Domain: ssc-weather
  */
 
+use \SSCW\Command;
+use \SSCW\Request;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 define( 'SSC_WEATHER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once( SSC_WEATHER_PLUGIN_DIR . 'classes/class-request.php' );

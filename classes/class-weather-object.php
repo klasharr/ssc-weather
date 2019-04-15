@@ -1,5 +1,13 @@
 <?php
 
+namespace SSCW;
+
+use Exception;
+use WP_Error;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 class Weather_Object {
 
 	/**
@@ -108,7 +116,7 @@ class Weather_Object {
 				foreach( $segment as $key => $value ) {
 					if( $key == '$' ) {
 						$minutes = sprintf( "%02d:00", $value / 60 );
-						$tmp[ 'minutes' ] = $minutes;
+						$tmp[ 'hours' ] = $minutes;
 					} else {
 						$tmp[ $this->get_unit_label( $key ) ] = $value . $this->get_unit_units( $key );
 					}

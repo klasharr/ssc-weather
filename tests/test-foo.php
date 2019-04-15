@@ -1,5 +1,9 @@
 <?php
 
+namespace SSCW;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 require_once( SSC_WEATHER_PLUGIN_DIR . 'classes/class-test-base.php' );
 
 class SampleTest extends Test_Base {
