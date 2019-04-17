@@ -1,6 +1,8 @@
 # ssc-weather
 
-This is in development but will be a WordPress plugin to display UK Met Office weather data. I'm getting it all working in a CLI command and REST API endpoint first, then will add unit tests. The last step will be to make it display on the WordPress website. 
+This is in development but will be a WordPress plugin to display UK Met Office weather data. I've found the [Met Office](https://www.metoffice.gov.uk/public/weather/wind-map/#?tab=map&map=GustSpeed&zoom=9&lon=-1.94&lat=50.71&fcTime=1541019600) to have the most accurate wind and wind gust predictions from the sources I look at for my area. 
+
+I'm getting it all working in a CLI command and REST API endpoint first, then will add unit tests. The last step will be to make it display on the WordPress website. 
 
 ## REST_API Endpoint
 
