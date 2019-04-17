@@ -40,7 +40,7 @@ Evening             20mph       31mph     10C         8%
 
 ## Settings
 
-Met Office API requests need a [developer API](https://www.metoffice.gov.uk/datapoint/api) key which for now is stored in a transient added from the shell. I don't want to accidentally commit config that I shouldn't.
+Met Office API requests need a [developer API key](https://www.metoffice.gov.uk/datapoint/api)  which for now is stored in an option added from the shell. I don't want to accidentally commit config that I shouldn't.
 
 `met_office_key`
 
