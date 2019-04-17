@@ -1,6 +1,6 @@
 # ssc-weather
 
-This is in development but will be a WordPress plugin to display UK Met Office weather data. I'm getting it all working in a CLI command and REST API endpoint first, then will add unit tests. The last step will be to make it display on a website.
+This is in development but will be a WordPress plugin to display UK Met Office weather data. I'm getting it all working in a CLI command and REST API endpoint first, then will add unit tests. The last step will be to make it display on the WordPress website. 
 
 ## REST_API Endpoint
 
